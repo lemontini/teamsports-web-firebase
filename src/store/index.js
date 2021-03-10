@@ -1,8 +1,11 @@
-import { createStore } from "vuex";
+import { createStore } from 'vuex';
+
+import playersModule from './modules/players/index';
 
 export default createStore({
   state: {},
   mutations: {},
   actions: {},
-  modules: {}
+  getters: {},
+  modules: { players: playersModule },
 });
