@@ -1,7 +1,6 @@
 <template>
   <li>
-    <h2>{{ username }}</h2>
-    <!-- <h3>({{ fullName }})</h3> -->
+    <h2 :class="{ current: isCurrentUser }">{{ userName }}</h2>
     <div class="actions">
       <base-button link :to="playersDetailsLink">View Details</base-button>
     </div>
@@ -10,13 +9,16 @@
 
 <script>
 export default {
-  props: ['id', 'username', 'name', 'surname'],
+  props: ['id', 'userName', 'firstName', 'lastName'],
   computed: {
     fullName() {
-      return this.name + ' ' + this.surname;
+      return this.firstName + ' ' + this.lastName;
     },
     playersDetailsLink() {
       return this.$route.path + '/' + this.id; // for accessing the player details
+    },
+    isCurrentUser() {
+      return this.id === this.$store.state.userId;
     },
   },
 };
@@ -46,6 +48,10 @@ h4 {
 
 div {
   margin: 0.5rem 0;
+}
+
+.current {
+  color: #ffaa3b;
 }
 
 .actions {

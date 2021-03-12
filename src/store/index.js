@@ -3,9 +3,21 @@ import { createStore } from 'vuex';
 import playersModule from './modules/players/index';
 
 export default createStore({
-  state: {},
+  state() {
+    return {
+      userId: 'c3',
+      dbUrl: 'https://insectnet-web-apps.firebaseio.com/teamsports',
+    };
+  },
   mutations: {},
   actions: {},
-  getters: {},
+  getters: {
+    userId(state) {
+      return state.userId;
+    },
+    dbUrl(state) {
+      return state.dbUrl;
+    },
+  },
   modules: { players: playersModule },
 });

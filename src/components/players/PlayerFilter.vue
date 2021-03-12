@@ -2,11 +2,12 @@
   <base-card>
     <h2>
       <span class="filter-username">
-        Find player
+        Search
         <input
           type="text"
-          id="username"
-          placeholder="Search username"
+          id="userName"
+          placeholder="player name"
+          autocomplete="off"
           v-model="search"
         />
       </span>
@@ -26,7 +27,7 @@ export default {
     search() {
       const updatedList = this.$store.getters['players/players'].filter(
         player => {
-          return player.username
+          return player.userName
             .toLowerCase()
             .includes(this.search.toLowerCase());
         }

@@ -7,8 +7,18 @@ export default {
   state() {
     return {
       players: [
-        { id: 'p1', username: 'rokas', name: 'Rokas', surname: 'Kuliešius' },
-        { id: 'p2', username: 'šaras', name: 'Šarūnas', surname: 'Šukevičius' },
+        {
+          id: 'p1',
+          userName: 'rokas',
+          firstName: 'Rokas',
+          lastName: 'Kuliešius',
+        },
+        {
+          id: 'p2',
+          userName: 'šaras',
+          firstName: 'Šarūnas',
+          lastName: 'Šukevičius',
+        },
       ],
     };
   },

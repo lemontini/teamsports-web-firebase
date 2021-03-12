@@ -1,7 +1,7 @@
 <template>
   <section>
     <base-card>
-      <h2>{{ username }}</h2>
+      <h2>{{ userName }}</h2>
       <h3>({{ fullName }})</h3>
     </base-card>
   </section>
@@ -21,11 +21,11 @@ export default {
     );
   },
   computed: {
-    username() {
-      return this.selectedPlayer.username;
+    userName() {
+      return this.selectedPlayer.userName;
     },
     fullName() {
-      return this.selectedPlayer.name + ' ' + this.selectedPlayer.surname;
+      return this.selectedPlayer.firstName + ' ' + this.selectedPlayer.lastName;
     },
   },
 };

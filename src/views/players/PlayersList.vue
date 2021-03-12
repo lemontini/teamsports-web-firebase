@@ -9,9 +9,9 @@
           v-for="player in filteredPlayers"
           :key="player.id"
           :id="player.id"
-          :username="player.username"
-          :name="player.name"
-          :surname="player.surname"
+          :userName="player.userName"
+          :firstName="player.firstName"
+          :lastName="player.lastName"
         ></player-item>
       </ul>
       <h3 v-else>No players found.</h3>
@@ -39,9 +39,15 @@ export default {
       return this.filteredPlayers.length > 0;
     },
   },
+  created() {
+    this.loadPlayers();
+  },
   methods: {
     updateList(filteredPlayers) {
       this.filteredPlayers = filteredPlayers;
+    },
+    loadPlayers() {
+      this.$store.dispatch('players/loadPlayers');
     },
   },
 };

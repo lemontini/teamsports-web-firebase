@@ -47,20 +47,20 @@ a {
 a:active,
 button:hover,
 button:active {
-  background-color: #270041;
-  border-color: #270041;
+  background-color: #ff9b17;
+  border-color: #ff9100;
 }
 
 .flat {
   background-color: transparent;
-  color: #3a0061;
+  color: #ff9b17;
   border: none;
 }
 
 .outline {
   background-color: transparent;
-  border-color: #270041;
-  color: #270041;
+  border-color: #ff9b17;
+  color: #ff9100;
 }
 
 .flat:hover,
