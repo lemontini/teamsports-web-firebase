@@ -19,4 +19,12 @@ export default {
     // will be slow after the database increases.
     // better add a rootState data property [currentUser]
   },
+  shouldUpdate(state) {
+    const lastFetch = state.lastFetch;
+    if (!lastFetch) {
+      return true;
+    }
+    const currentTimestamp = new Date().getTime();
+    return (currentTimestamp - lastFetch) / 1000 > 60;
+  },
 };

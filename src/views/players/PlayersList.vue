@@ -1,10 +1,17 @@
 <template>
+  <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
+    <p>{{ error }}</p>
+  </base-dialog>
+  <base-button @click="loadPlayers(true)">Refresh</base-button>
   <section>
     <player-filter @change-filter="updateList"></player-filter>
   </section>
   <section>
     <base-card>
-      <ul v-if="hasPlayers">
+      <div v-if="isLoading">
+        <base-spinner></base-spinner>
+      </div>
+      <ul v-else-if="hasPlayers">
         <player-item
           v-for="player in filteredPlayers"
           :key="player.id"
@@ -30,14 +37,19 @@ export default {
   components: { PlayerItem, PlayerFilter },
   data() {
     return {
+      isLoading: false,
+      error: null,
       filteredPlayers: this.$store.getters['players/players'],
     };
   },
   computed: {
     hasPlayers() {
       // return this.$store.getters['players/hasPlayers'];
-      return this.filteredPlayers.length > 0;
+      return !this.isLoading && this.filteredPlayers.length > 0;
     },
+    // filteredPlayers() {
+    //   return this.$store.getters['players/players'];
+    // },
   },
   created() {
     this.loadPlayers();
@@ -46,8 +58,19 @@ export default {
     updateList(filteredPlayers) {
       this.filteredPlayers = filteredPlayers;
     },
-    loadPlayers() {
-      this.$store.dispatch('players/loadPlayers');
+    async loadPlayers(refresh = false) {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch('players/loadPlayers', {
+          forceRefresh: refresh,
+        });
+      } catch (error) {
+        this.error = error.message || 'Something went wrong!';
+      }
+      this.isLoading = false;
+    },
+    handleError() {
+      this.error = null;
     },
   },
 };

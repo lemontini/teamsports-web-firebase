@@ -5,4 +5,7 @@ export default {
   setPlayers(state, payload) {
     state.players = payload;
   },
+  setFetchTimestamp(state) {
+    state.lastFetch = new Date().getTime();
+  },
 };
