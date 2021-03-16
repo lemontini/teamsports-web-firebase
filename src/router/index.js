@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import PlayersList from '../views/players/PlayersList.vue';
 import PlayerDetail from '../views/players/PlayerDetail.vue';
 import PlayerRegistration from '../views/players/PlayerRegistration.vue';
+import UserAuth from '../views/auth/UserAuth.vue';
 
 const routes = [
   { path: '/', redirect: '/players' },
@@ -23,6 +24,8 @@ const routes = [
   { path: '/locations', name: 'Locations', component: null },
 
   { path: '/events', name: 'Events', component: null },
+
+  { path: '/auth', component: UserAuth },
 
   { path: '/:notFound(.*)', component: null },
 ];

@@ -8,8 +8,10 @@ export default {
       lastName: data.lastName,
     };
 
+    const token = context.rootGetters.token;
+
     const response = await fetch(
-      `${context.rootGetters.dbUrl}/players/${userId}.json`,
+      `${context.rootGetters.dbUrl}/players/${userId}.json?auth=` + token,
       {
         method: 'PUT',
         body: JSON.stringify(playerData),
