@@ -36,7 +36,7 @@ a {
   padding: 0.75rem 1.5rem;
   font: inherit;
   background-color: #ffaa3b;
-  border: #ffaa3b;
+  border: 1px solid #ffaa3b;
   color: white;
   cursor: pointer;
   border-radius: 30px;
@@ -44,6 +44,7 @@ a {
   display: inline-block;
 }
 
+a:hover,
 a:active,
 button:hover,
 button:active {
@@ -67,6 +68,8 @@ button:active {
 .flat:active,
 .outline:hover,
 .outline:active {
-  background-color: #edd2ff;
+  color: white;
+  background-color: #ff9b17;
+  border-color: #ff9100;
 }
 </style>

@@ -2,7 +2,9 @@
   <li>
     <h2 :class="{ current: isCurrentUser }">{{ userName }}</h2>
     <div class="actions">
-      <base-button link :to="playersDetailsLink">View Details</base-button>
+      <base-button mode="outline" link :to="playersDetailsLink"
+        >View Details</base-button
+      >
     </div>
   </li>
 </template>

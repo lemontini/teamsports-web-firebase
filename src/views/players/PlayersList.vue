@@ -2,12 +2,16 @@
   <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
     <p>{{ error }}</p>
   </base-dialog>
-  <base-button @click="loadPlayers(true)">Refresh</base-button>
   <section>
     <player-filter @change-filter="updateList"></player-filter>
   </section>
   <section>
     <base-card>
+      <div class="controls">
+        <base-button mode="outline" @click="loadPlayers(true)"
+          >Refresh</base-button
+        >
+      </div>
       <div v-if="isLoading">
         <base-spinner></base-spinner>
       </div>
@@ -33,15 +37,18 @@ import PlayerFilter from '../../components/players/PlayerFilter.vue';
 // import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: 'Players',
+  // name: 'Players',
   components: { PlayerItem, PlayerFilter },
+
   data() {
     return {
       isLoading: false,
       error: null,
-      filteredPlayers: this.$store.getters['players/players'],
+      // filteredPlayers: this.$store.getters['players/players'],
+      filteredPlayers: '',
     };
   },
+
   computed: {
     hasPlayers() {
       // return this.$store.getters['players/hasPlayers'];
@@ -50,14 +57,23 @@ export default {
     // filteredPlayers() {
     //   return this.$store.getters['players/players'];
     // },
+    // filteredPlayers: {
+    //   get() {
+    //     return this.$store.getters['players/players'];
+    //   },
+    //   set(value) {},
+    // },
   },
+
   created() {
     this.loadPlayers();
   },
+
   methods: {
     updateList(filteredPlayers) {
       this.filteredPlayers = filteredPlayers;
     },
+
     async loadPlayers(refresh = false) {
       this.isLoading = true;
       try {
@@ -69,6 +85,7 @@ export default {
       }
       this.isLoading = false;
     },
+
     handleError() {
       this.error = null;
     },

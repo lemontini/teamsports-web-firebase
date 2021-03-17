@@ -9,6 +9,7 @@
 
 <script>
 import PlayerForm from '../../components/players/PlayerForm.vue';
+
 export default {
   components: { PlayerForm },
   methods: {

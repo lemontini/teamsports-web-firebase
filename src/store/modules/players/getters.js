@@ -12,13 +12,13 @@ export default {
     // will be slow after the database increases.
     // better add a rootState data property [isLogged]
   },
-  currentUser(_, getters, _2, rootGetters) {
-    const players = getters.players;
-    const userId = rootGetters.userId;
-    return players.find(player => player.id === userId).userName;
-    // will be slow after the database increases.
-    // better add a rootState data property [currentUser]
-  },
+  // currentUser(_, getters, _2, rootGetters) {
+  //   const players = getters.players;
+  //   const userId = rootGetters.userId;
+  //   return players.find(player => player.id === userId).userName;
+  //   // will be slow after the database increases.
+  //   // better add a rootState data property [currentUser]
+  // },
   shouldUpdate(state) {
     const lastFetch = state.lastFetch;
     if (!lastFetch) {

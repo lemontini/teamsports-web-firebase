@@ -9,7 +9,7 @@
     <base-card>
       <form @submit.prevent="submitForm">
         <div class="form-control">
-          <label for="email">Email</label>
+          <label for="email">E-mail</label>
           <input type="email" id="email" v-model.trim="email" />
         </div>
         <div class="form-control">
@@ -41,6 +41,7 @@ export default {
       error: null,
     };
   },
+
   computed: {
     submitButtonCaption() {
       if (this.mode === 'login') {
@@ -57,6 +58,7 @@ export default {
       }
     },
   },
+
   methods: {
     async submitForm() {
       this.formIsValid = true;
@@ -89,6 +91,7 @@ export default {
 
       this.isLoading = false;
     },
+
     switchAuthMode() {
       if (this.mode === 'login') {
         this.mode = 'signup';
@@ -96,6 +99,7 @@ export default {
         this.mode = 'login';
       }
     },
+
     handleError() {
       this.error = null;
     },
