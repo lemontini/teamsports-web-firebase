@@ -26,6 +26,7 @@
         ></player-item>
       </ul>
       <h3 v-else>No players found.</h3>
+      <h3>{{ hasPlayers }}</h3>
     </base-card>
   </section>
 </template>
@@ -45,13 +46,12 @@ export default {
       isLoading: false,
       error: null,
       // filteredPlayers: this.$store.getters['players/players'],
-      filteredPlayers: '',
+      filteredPlayers: this.$store.getters['players/players'],
     };
   },
 
   computed: {
     hasPlayers() {
-      // return this.$store.getters['players/hasPlayers'];
       return !this.isLoading && this.filteredPlayers.length > 0;
     },
     // filteredPlayers() {

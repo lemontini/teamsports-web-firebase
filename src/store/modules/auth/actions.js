@@ -36,7 +36,7 @@ export default {
 
     if (mode === 'signup') {
       url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD099rOOSoe-kY7BNG6Cs0bav-6brXnlug';
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD099rOOSoe-kY7BNG6Cs0bav-6brXnlug';
     }
 
     const response = await fetch(url, {

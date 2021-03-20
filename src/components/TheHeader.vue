@@ -9,9 +9,16 @@
     <router-link v-if="isLoggedIn && !isPlayer" to="/register"
       >Become a player</router-link
     >
-    <base-button link to="/auth" v-if="!isLoggedIn">Login</base-button>
+    <base-button link to="/auth" v-if="!isLoggedIn && !isAuthInProgress"
+      >Login</base-button
+    >
     <!-- <base-button link to="/register">SignUp</base-button> -->
-    <base-button @click="logout" v-else>{{ currentUser }}</base-button>
+    <base-button link v-else-if="isLoggedIn && !isPlayer" @click="logout"
+      >Log off</base-button
+    >
+    <base-button @click="logout" v-else-if="isLoggedIn && isPlayer">{{
+      currentUser
+    }}</base-button>
   </header>
 </template>
 
@@ -26,6 +33,9 @@ export default {
     },
     currentUser() {
       return this.$store.getters['players/currentUser'];
+    },
+    isAuthInProgress() {
+      return this.$route.path === '/auth';
     },
   },
   methods: {
