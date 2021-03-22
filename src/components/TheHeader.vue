@@ -1,6 +1,9 @@
 <template>
   <header id="nav">
-    <h1>TeamSports</h1>
+    <div>
+      <img class="logo" src="../assets/logo.png" width="50" />
+      <h1 class="app-title">TeamSports</h1>
+    </div>
     <nav>
       <router-link to="/players">Players</router-link>
       <router-link to="/locations">Locations</router-link>
@@ -48,6 +51,15 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  float: left;
+  padding: 0 1rem;
+}
+
+.app-title {
+  float: left;
+}
+
 #nav {
   width: 100%;
   margin: auto;
@@ -76,6 +88,11 @@ export default {
 #nav a.router-link-exact-active {
   color: #ffaa3b;
 }
+
+/* #logo {
+  float: left;
+  text-align: center;
+} */
 
 /* header nav {
   width: 90%;

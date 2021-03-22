@@ -27,6 +27,7 @@
       </ul>
       <h3 v-else>No players found.</h3>
       <h3>{{ hasPlayers }}</h3>
+      <p>{{ filteredPlayers }}</p>
     </base-card>
   </section>
 </template>
@@ -34,18 +35,14 @@
 <script>
 import PlayerItem from '../../components/players/PlayerItem.vue';
 import PlayerFilter from '../../components/players/PlayerFilter.vue';
-// @ is an alias to /src
-// import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  // name: 'Players',
   components: { PlayerItem, PlayerFilter },
 
   data() {
     return {
       isLoading: false,
       error: null,
-      // filteredPlayers: this.$store.getters['players/players'],
       filteredPlayers: this.$store.getters['players/players'],
     };
   },
@@ -54,19 +51,12 @@ export default {
     hasPlayers() {
       return !this.isLoading && this.filteredPlayers.length > 0;
     },
-    // filteredPlayers() {
-    //   return this.$store.getters['players/players'];
-    // },
-    // filteredPlayers: {
-    //   get() {
-    //     return this.$store.getters['players/players'];
-    //   },
-    //   set(value) {},
-    // },
   },
 
   created() {
+    console.log(this.$store.getters['players/players']);
     this.loadPlayers();
+    console.log(this.$store.getters['players/players']);
   },
 
   methods: {
