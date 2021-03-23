@@ -3,6 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router';
 import PlayersList from '../views/players/PlayersList.vue';
 import PlayerDetail from '../views/players/PlayerDetail.vue';
 import PlayerRegistration from '../views/players/PlayerRegistration.vue';
+
+import LocationsList from '../views/locations/LocationsList.vue';
+
 import UserAuth from '../views/auth/UserAuth.vue';
 import store from '../store/index.js';
 
@@ -21,7 +24,7 @@ const routes = [
     meta: { requiresAuth: true },
   },
 
-  { path: '/locations', component: null },
+  { path: '/locations', component: LocationsList },
 
   { path: '/events', component: null },
 

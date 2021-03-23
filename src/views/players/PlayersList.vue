@@ -20,9 +20,9 @@
           v-for="player in filteredPlayers"
           :key="player.id"
           :id="player.id"
-          :userName="player.userName"
-          :firstName="player.firstName"
-          :lastName="player.lastName"
+          :user-name="player.userName"
+          :first-name="player.firstName"
+          :last-name="player.lastName"
         ></player-item>
       </ul>
       <h3 v-else>No players found.</h3>
