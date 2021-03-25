@@ -6,11 +6,24 @@ export default {
   namespaced: true,
   state() {
     return {
-      lastFetch: true,
-      locations: [],
+      lastFetch: null,
+      locations: [
+        {
+          id: 'l1',
+          name: 'SEB arena',
+          address: 'Ąžuolyno g. 7, Vilnius',
+          maxCourts: 4,
+        },
+        {
+          id: 'l2',
+          name: 'DELFI Sporto Centras',
+          address: 'Ozo g. 4C, Vilnius',
+          maxCourts: 8,
+        },
+      ],
     };
   },
-  getters,
-  mutations,
-  actions,
+  getters: getters,
+  mutations: mutations,
+  actions: actions,
 };

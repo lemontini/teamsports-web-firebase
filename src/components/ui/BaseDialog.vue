@@ -71,11 +71,12 @@ dialog {
   padding: 0;
   margin: 0;
   overflow: hidden;
-  background-color: white;
+  background-color: #ffe1cd31;
+  color: #ffe5d3;
 }
 
 header {
-  background-color: #3a0061;
+  background-color: #ffaa3b31;
   color: white;
   width: 100%;
   padding: 1rem;

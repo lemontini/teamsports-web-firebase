@@ -37,6 +37,7 @@ li {
 
 h2 {
   font-size: 1.5rem;
+  float: left;
 }
 
 h3 {

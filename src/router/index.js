@@ -5,6 +5,7 @@ import PlayerDetail from '../views/players/PlayerDetail.vue';
 import PlayerRegistration from '../views/players/PlayerRegistration.vue';
 
 import LocationsList from '../views/locations/LocationsList.vue';
+import LocationDetail from '../views/locations/LocationDetail.vue';
 
 import UserAuth from '../views/auth/UserAuth.vue';
 import store from '../store/index.js';
@@ -13,11 +14,7 @@ const routes = [
   { path: '/', redirect: '/players' },
 
   { path: '/players', name: 'Players', component: PlayersList },
-  {
-    path: '/players/:id',
-    component: PlayerDetail,
-    props: true,
-  },
+  { path: '/players/:id', component: PlayerDetail, props: true },
   {
     path: '/register',
     component: PlayerRegistration,
@@ -25,6 +22,7 @@ const routes = [
   },
 
   { path: '/locations', component: LocationsList },
+  { path: '/locations/:id', component: LocationDetail, props: true },
 
   { path: '/events', component: null },
 

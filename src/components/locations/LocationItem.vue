@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  props: ['id', 'name', 'address'],
+  props: ['id', 'name', 'address', 'maxCourts'],
   computed: {
     locationDetailsLink() {
       return this.$route.path + '/' + this.id; // for accessing the location details
@@ -31,6 +31,7 @@ li {
 
 h2 {
   font-size: 1.5rem;
+  float: left;
 }
 
 h3 {
