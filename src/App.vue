@@ -13,9 +13,6 @@ export default {
       return this.$store.getters.didAutoLogout;
     },
   },
-  beforeCreate() {
-    document.body.style.fontFamily = 'Avenir, Helvetica, Arial, sans-serif;';
-  },
   created() {
     this.$store.dispatch('tryLogin');
   },

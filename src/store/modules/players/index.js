@@ -23,7 +23,7 @@ export default {
       ],
     };
   },
-  mutations: mutations,
-  actions: actions,
-  getters: getters,
+  mutations,
+  actions,
+  getters,
 };

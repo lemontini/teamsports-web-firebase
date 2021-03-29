@@ -44,13 +44,14 @@ export default {
 
   computed: {
     hasLocations() {
-      return !this.isLoading && this.filteredLocations.length > 0;
+      // return !this.isLoading && this.filteredLocations.length > 0;
+      return !this.isLoading && this.$store.getters['locations/hasLocations'];
     },
   },
 
-  updated() {
+  created() {
     // console.log(this.$store.getters['locations/locations']);
-    this.loadLocations(true);
+    this.loadLocations();
     // console.log(this.$store.getters['locations/locations']);
   },
 
@@ -59,7 +60,7 @@ export default {
       this.filteredLocations = filteredLocations;
     },
 
-    async loadLocations(refresh = true) {
+    async loadLocations(refresh = false) {
       this.isLoading = true;
       try {
         await this.$store.dispatch('locations/loadLocations', {
