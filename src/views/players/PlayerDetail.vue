@@ -1,9 +1,9 @@
 <template>
   <section>
-    <base-card>
+    <base-dialog show title="Player details" @close="back">
       <h2>{{ userName }}</h2>
       <h3>({{ fullName }})</h3>
-    </base-card>
+    </base-dialog>
   </section>
 </template>
 
@@ -26,6 +26,11 @@ export default {
     },
     fullName() {
       return this.selectedPlayer.firstName + ' ' + this.selectedPlayer.lastName;
+    },
+  },
+  methods: {
+    back() {
+      this.$router.replace('/players');
     },
   },
 };

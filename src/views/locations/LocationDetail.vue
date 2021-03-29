@@ -1,6 +1,6 @@
 <template
   ><section>
-    <base-dialog show title="Player details" @close="returnToLocations">
+    <base-dialog show title="Location details" @close="back">
       <h2>{{ selectedLocation.name }}</h2>
       <h3>Address: {{ selectedLocation.address }}</h3>
       <h3>Courts: {{ selectedLocation.maxCourts }}</h3>
@@ -22,7 +22,7 @@ export default {
     );
   },
   methods: {
-    returnToLocations() {
+    back() {
       this.$router.replace('/locations');
     },
   },

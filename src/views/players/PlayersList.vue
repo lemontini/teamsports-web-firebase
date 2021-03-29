@@ -29,6 +29,7 @@
       <h3>{{ hasPlayers }}</h3>
       <p>{{ filteredPlayers }}</p>
     </base-card>
+    <router-view />
   </section>
 </template>
 

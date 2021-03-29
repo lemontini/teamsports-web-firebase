@@ -6,6 +6,9 @@ import PlayerRegistration from '../views/players/PlayerRegistration.vue';
 
 import LocationsList from '../views/locations/LocationsList.vue';
 import LocationDetail from '../views/locations/LocationDetail.vue';
+import LocationRegistration from '../views/locations/LocationRegistration.vue';
+
+import NotFound from '../views/NotFound.vue';
 
 import UserAuth from '../views/auth/UserAuth.vue';
 import store from '../store/index.js';
@@ -13,22 +16,37 @@ import store from '../store/index.js';
 const routes = [
   { path: '/', redirect: '/players' },
 
-  { path: '/players', name: 'Players', component: PlayersList },
-  { path: '/players/:id', component: PlayerDetail, props: true },
+  {
+    path: '/players',
+    name: 'Players',
+    component: PlayersList,
+    children: [{ path: ':id', component: PlayerDetail, props: true }],
+  },
+  // { path: '/players/:id', component: PlayerDetail, props: true },
   {
     path: '/register',
     component: PlayerRegistration,
     meta: { requiresAuth: true },
   },
 
-  { path: '/locations', component: LocationsList },
-  { path: '/locations/:id', component: LocationDetail, props: true },
+  {
+    path: '/locations',
+    component: LocationsList,
+    children: [
+      { path: ':id', component: LocationDetail, props: true },
+      {
+        path: 'register',
+        component: LocationRegistration,
+        meta: { requiresAuth: true },
+      },
+    ],
+  },
 
   { path: '/events', component: null },
 
   { path: '/auth', component: UserAuth, meta: { requiresUnauth: true } },
 
-  { path: '/:notFound(.*)', component: null },
+  { path: '/:notFound(.*)', component: NotFound },
 ];
 
 const router = createRouter({

@@ -1,3 +1,5 @@
+// import db from '../../../firebaseDB';
+
 export default {
   async registerPlayer(context, data) {
     const userId = context.rootGetters.userId;
@@ -17,6 +19,10 @@ export default {
         body: JSON.stringify(playerData),
       }
     );
+
+    // const response = await db
+    //   .ref(`teamsports/players/${userId}`)
+    //   .set(playerData);
 
     // const responseData = await response.json();
     if (!response.ok) {

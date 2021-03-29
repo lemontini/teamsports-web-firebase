@@ -50,6 +50,7 @@ export default {
     clearValidity(input) {
       this[input].isValid = true;
     },
+
     validateForm() {
       this.formIsValid = true;
       if (this.userName.val === '') {
@@ -65,6 +66,7 @@ export default {
         this.formIsValid = false;
       }
     },
+
     submitForm() {
       this.validateForm();
       if (!this.formIsValid) {

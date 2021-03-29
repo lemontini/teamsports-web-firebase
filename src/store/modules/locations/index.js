@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state() {
     return {
-      lastFetch: null,
+      // lastFetch: null,
       locations: [
         {
           id: 'l1',
@@ -23,7 +23,7 @@ export default {
       ],
     };
   },
-  getters: getters,
-  mutations: mutations,
-  actions: actions,
+  getters,
+  mutations,
+  actions,
 };

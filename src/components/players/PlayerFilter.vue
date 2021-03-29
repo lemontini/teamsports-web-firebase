@@ -6,7 +6,7 @@
         <input
           type="text"
           id="userName"
-          placeholder="player username"
+          placeholder="player"
           autocomplete="off"
           v-model="search"
         />
