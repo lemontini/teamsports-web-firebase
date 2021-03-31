@@ -2,7 +2,11 @@
   <section>
     <base-card>
       <div class="controls">
-        <base-button mode="outline" @click="loadLocations(true)">
+        <base-button
+          v-if="hasLocations"
+          mode="outline"
+          @click="loadLocations(true)"
+        >
           Refresh
         </base-button>
         <base-button mode="outline" link to="/locations/register"
@@ -38,26 +42,30 @@ export default {
     return {
       isLoading: false,
       error: null,
-      filteredLocations: this.$store.getters['locations/locations'],
+      locations: this.$store.getters['locations/locations'],
+      // filteredLocations: this.$store.getters['locations/locations'],
     };
   },
 
   computed: {
     hasLocations() {
-      // return !this.isLoading && this.filteredLocations.length > 0;
-      return !this.isLoading && this.$store.getters['locations/hasLocations'];
+      return !this.isLoading && this.filteredLocations.length > 0;
+      // return !this.isLoading && this.$store.getters['locations/hasLocations'];
+    },
+    filteredLocations() {
+      return this.locations;
     },
   },
 
   created() {
     // console.log(this.$store.getters['locations/locations']);
-    this.loadLocations();
+    this.loadLocations(true);
     // console.log(this.$store.getters['locations/locations']);
   },
 
   methods: {
     updateList(filteredLocations) {
-      this.filteredLocations = filteredLocations;
+      this.locations = filteredLocations;
     },
 
     async loadLocations(refresh = false) {

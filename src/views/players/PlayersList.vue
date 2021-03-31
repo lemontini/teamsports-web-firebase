@@ -7,13 +7,16 @@
     >
       <p>{{ error }}</p>
     </base-dialog>
-    <!-- <section>
+    <section>
       <player-filter @change-filter="updateList"></player-filter>
-    </section> -->
+    </section>
     <section>
       <base-card>
         <div class="controls">
-          <base-button mode="outline" @click="loadPlayers(true)"
+          <base-button
+            v-if="hasPlayers"
+            mode="outline"
+            @click="loadPlayers(true)"
             >Refresh</base-button
           >
         </div>
@@ -31,8 +34,8 @@
           ></player-item>
         </ul>
         <h3 v-else>No players found.</h3>
-        <h3>{{ hasPlayers }}</h3>
-        <p>{{ filteredPlayers }}</p>
+        <!-- <h3>{{ hasPlayers }}</h3> -->
+        <!-- <p>{{ filteredPlayers }}</p> -->
       </base-card>
       <router-view />
     </section>
@@ -41,38 +44,44 @@
 
 <script>
 import PlayerItem from '../../components/players/PlayerItem.vue';
-// import PlayerFilter from '../../components/players/PlayerFilter.vue';
+import PlayerFilter from '../../components/players/PlayerFilter.vue';
 
 export default {
   components: {
     PlayerItem,
-    // PlayerFilter
+    PlayerFilter,
   },
 
   data() {
     return {
       isLoading: false,
       error: null,
-      filteredPlayers: this.$store.getters['players/players'],
+      // filteredPlayers: this.$store.getters['players/players'],
+      players: this.$store.getters['players/players'],
     };
   },
 
   computed: {
     hasPlayers() {
-      // return !this.isLoading && this.filteredPlayers.length > 0;
-      return !this.isLoading && this.$store.getters['players/hasPlayers'];
+      return !this.isLoading && this.filteredPlayers.length > 0;
+      // return !this.isLoading && this.$store.getters['players/hasPlayers'];
+    },
+    filteredPlayers() {
+      return this.players;
     },
   },
 
   created() {
-    console.log(this.$store.getters['players/players']);
-    this.loadPlayers();
-    console.log(this.$store.getters['players/players']);
+    // console.log(this.$store.getters['players/players']);
+    this.loadPlayers(true);
+    // console.log(this.$store.getters['players/players']);
   },
 
   methods: {
     updateList(filteredPlayers) {
-      this.filteredPlayers = filteredPlayers;
+      this.players = filteredPlayers;
+      console.log(this.hasPlayers);
+      console.log(this.filteredPlayers);
     },
 
     async loadPlayers(refresh = false) {
