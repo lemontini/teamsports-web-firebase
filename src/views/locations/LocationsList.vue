@@ -42,30 +42,30 @@ export default {
     return {
       isLoading: false,
       error: null,
-      locations: this.$store.getters['locations/locations'],
-      // filteredLocations: this.$store.getters['locations/locations'],
+      filterCriteria: '',
     };
   },
 
   computed: {
     hasLocations() {
       return !this.isLoading && this.filteredLocations.length > 0;
-      // return !this.isLoading && this.$store.getters['locations/hasLocations'];
     },
+
     filteredLocations() {
-      return this.locations;
+      const locations = this.$store.getters['locations/locations'];
+      return locations.filter(location =>
+        location.name.includes(this.filterCriteria)
+      );
     },
   },
 
   created() {
-    // console.log(this.$store.getters['locations/locations']);
-    this.loadLocations(true);
-    // console.log(this.$store.getters['locations/locations']);
+    this.loadLocations();
   },
 
   methods: {
-    updateList(filteredLocations) {
-      this.locations = filteredLocations;
+    updateList(filterCriteria) {
+      this.filterCriteria = filterCriteria;
     },
 
     async loadLocations(refresh = false) {

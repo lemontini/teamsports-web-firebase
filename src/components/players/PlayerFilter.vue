@@ -25,14 +25,7 @@ export default {
   },
   watch: {
     search() {
-      const updatedList = this.$store.getters['players/players'].filter(
-        player => {
-          return player.userName
-            .toLowerCase()
-            .includes(this.search.toLowerCase());
-        }
-      );
-      this.$emit('change-filter', updatedList);
+      this.$emit('change-filter', this.search);
     },
   },
 };

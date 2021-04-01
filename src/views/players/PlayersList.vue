@@ -34,8 +34,6 @@
           ></player-item>
         </ul>
         <h3 v-else>No players found.</h3>
-        <!-- <h3>{{ hasPlayers }}</h3> -->
-        <!-- <p>{{ filteredPlayers }}</p> -->
       </base-card>
       <router-view />
     </section>
@@ -56,32 +54,30 @@ export default {
     return {
       isLoading: false,
       error: null,
-      // filteredPlayers: this.$store.getters['players/players'],
-      players: this.$store.getters['players/players'],
+      filterCriteria: '',
     };
   },
 
   computed: {
     hasPlayers() {
       return !this.isLoading && this.filteredPlayers.length > 0;
-      // return !this.isLoading && this.$store.getters['players/hasPlayers'];
     },
+
     filteredPlayers() {
-      return this.players;
+      const players = this.$store.getters['players/players'];
+      return players.filter(player =>
+        player.userName.toLowerCase().includes(this.filterCriteria)
+      );
     },
   },
 
   created() {
-    // console.log(this.$store.getters['players/players']);
-    this.loadPlayers(true);
-    // console.log(this.$store.getters['players/players']);
+    this.loadPlayers();
   },
 
   methods: {
-    updateList(filteredPlayers) {
-      this.players = filteredPlayers;
-      console.log(this.hasPlayers);
-      console.log(this.filteredPlayers);
+    updateList(filterCriteria) {
+      this.filterCriteria = filterCriteria;
     },
 
     async loadPlayers(refresh = false) {
