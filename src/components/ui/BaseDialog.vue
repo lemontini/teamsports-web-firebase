@@ -12,7 +12,8 @@
       </section>
       <menu v-if="!fixed">
         <slot name="actions">
-          <base-button @click="tryClose">Close</base-button>
+          <!-- <base-button v-if="actions">{{ actions }}</base-button> -->
+          <base-button v-if="actions" @click="tryClose">Close</base-button>
         </slot>
       </menu>
     </dialog>
@@ -22,6 +23,7 @@
 <script>
 export default {
   props: {
+    actions: { type: Boolean, required: false },
     show: {
       type: Boolean,
       required: true,
@@ -66,7 +68,7 @@ export default {
   left: 0;
   height: 100vh;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.65);
   z-index: 10;
 }
 
@@ -78,7 +80,7 @@ dialog {
   z-index: 100;
   border-radius: 12px;
   border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.76);
   padding: 0;
   margin: 0;
   overflow: hidden;

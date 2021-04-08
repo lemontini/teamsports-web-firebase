@@ -7,37 +7,37 @@
     >
       <p>{{ error }}</p>
     </base-dialog>
-    <section>
+    <!-- <section>
       <location-filter @change-filter="updateList"></location-filter>
-    </section>
+    </section> -->
     <section>
       <base-card>
         <div class="controls">
           <base-button
-            v-if="hasLocations"
+            v-if="hasEvents"
             mode="outline"
-            @click="loadLocations(true)"
+            @click="loadEvents(true)"
           >
             Refresh
           </base-button>
-          <base-button mode="outline" link to="/locations/register"
-            >Add new</base-button
+          <base-button mode="outline" link to="/events/register"
+            >Create</base-button
           >
         </div>
         <div v-if="isLoading">
           <base-spinner></base-spinner>
         </div>
-        <ul v-else-if="hasLocations">
-          <location-item
-            v-for="location in filteredLocations"
-            :key="location.id"
-            :id="location.id"
-            :name="location.name"
-            :address="location.address"
-            :last-name="location.maxCourts"
-          ></location-item>
+        <ul v-else-if="hasEvents">
+          <!-- <event-item
+            v-for="event in filteredEvents"
+            :key="event.id"
+            :id="event.id"
+            :name="event.name"
+            :address="event.address"
+            :last-name="event.maxCourts"
+          ></event-item> -->
         </ul>
-        <h3 v-else>No locations found.</h3>
+        <h3 v-else>No events found.</h3>
       </base-card>
       <router-view />
     </section>
@@ -45,11 +45,11 @@
 </template>
 
 <script>
-import LocationItem from '../../components/locations/LocationItem.vue';
-import LocationFilter from '../../components/locations/LocationFilter.vue';
+// import EventItem from '../../components/events/EventItem.vue';
+// import EventFilter from '../../components/events/EventFilter.vue';
 
 export default {
-  components: { LocationItem, LocationFilter },
+  // components: { LocationItem, LocationFilter },
 
   data() {
     return {
@@ -60,20 +60,20 @@ export default {
   },
 
   computed: {
-    hasLocations() {
-      return !this.isLoading && this.filteredLocations.length > 0;
+    hasEvents() {
+      return !this.isLoading && this.filteredEvents.length > 0;
     },
 
-    filteredLocations() {
-      const locations = this.$store.getters['locations/locations'];
-      return locations.filter(location =>
-        location.name.toLowerCase().includes(this.filterCriteria)
+    filteredEvents() {
+      const events = this.$store.getters['events/events'];
+      return events.filter(event =>
+        event.name.toLowerCase().includes(this.filterCriteria)
       );
     },
   },
 
   created() {
-    this.loadLocations();
+    this.loadEvents();
   },
 
   methods: {
@@ -81,10 +81,10 @@ export default {
       this.filterCriteria = filterCriteria;
     },
 
-    async loadLocations(refresh = false) {
+    async loadEvents(refresh = false) {
       this.isLoading = true;
       try {
-        await this.$store.dispatch('locations/loadLocations', {
+        await this.$store.dispatch('events/loadEvents', {
           forceRefresh: refresh,
         });
       } catch (error) {

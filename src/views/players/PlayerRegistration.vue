@@ -1,9 +1,12 @@
 <template>
   <section>
-    <base-card>
-      <h2>Register as a player</h2>
-      <player-form @save-data="saveData"></player-form>
-    </base-card>
+    <!-- <base-card> -->
+    <!-- <h2>Register as a player</h2> -->
+    <player-form
+      title="Register as a player"
+      @save-data="saveData"
+    ></player-form>
+    <!-- </base-card> -->
   </section>
 </template>
 

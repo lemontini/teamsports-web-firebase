@@ -9,19 +9,17 @@
       <router-link to="/locations">Locations</router-link>
       <router-link to="/events">Events</router-link>
     </nav>
-    <router-link v-if="isLoggedIn && !isPlayer" to="/register"
-      >Become a player</router-link
-    >
     <base-button link to="/auth" v-if="!isLoggedIn && !isAuthInProgress"
       >Login</base-button
     >
-    <!-- <base-button link to="/register">SignUp</base-button> -->
     <base-button link v-else-if="isLoggedIn && !isPlayer" @click="logout"
       >Log off</base-button
     >
     <base-button @click="logout" v-else-if="isLoggedIn && isPlayer">{{
       currentUser
     }}</base-button>
+    <!-- {{ isLoggedIn }}
+    {{ isPlayer }} -->
   </header>
 </template>
 

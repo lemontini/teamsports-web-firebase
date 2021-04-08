@@ -1,10 +1,10 @@
 <template>
-  <teleport to="body">
-    <base-card>
-      <h2>Register a new location</h2>
-      <location-form @save-data="saveData"></location-form>
-    </base-card>
-  </teleport>
+  <!-- <teleport to="body"> -->
+  <!-- <base-card> -->
+  <!-- <h2>Register a new location</h2> -->
+  <location-form @save-data="saveData"></location-form>
+  <!-- </base-card> -->
+  <!-- </teleport> -->
 </template>
 
 <script>

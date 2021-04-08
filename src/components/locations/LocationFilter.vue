@@ -1,12 +1,12 @@
 <template>
   <base-card>
     <h2>
-      <span class="filter-username">
+      <span class="filter-name">
         Search
         <input
           type="text"
-          id="userName"
-          placeholder="player"
+          id="name"
+          placeholder="location"
           autocomplete="off"
           v-model.trim="search"
         />

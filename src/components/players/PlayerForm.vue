@@ -1,38 +1,40 @@
 <template>
-  <form @submit.prevent="submitForm">
-    <div class="form-control" :class="{ invalid: !userName.isValid }">
-      <label for="username">Username</label>
-      <input
-        type="text"
-        id="username"
-        v-model.trim="userName.val"
-        @blur="clearValidity('userName')"
-      />
-      <p v-if="!userName.isValid">Username shouldn't be empty.</p>
-    </div>
-    <div class="form-control" :class="{ invalid: !firstName.isValid }">
-      <label for="firstname">Firstname</label>
-      <input
-        type="text"
-        id="firstname"
-        v-model.trim="firstName.val"
-        @blur="clearValidity('firstName')"
-      />
-      <p v-if="!firstName.isValid">Firstname shouldn't be empty.</p>
-    </div>
-    <div class="form-control" :class="{ invalid: !lastName.isValid }">
-      <label for="lastname">Lastname</label>
-      <input
-        type="text"
-        id="lastname"
-        v-model.trim="lastName.val"
-        @blur="clearValidity('lastName')"
-      />
-      <p v-if="!lastName.isValid">Lastname shouldn't be empty.</p>
-    </div>
-    <p v-if="!formIsValid">Please fix the input errors.</p>
-    <base-button>Register</base-button>
-  </form>
+  <base-dialog show title="Input your data" @close="closeForm">
+    <form @submit.prevent="submitForm">
+      <div class="form-control" :class="{ invalid: !userName.isValid }">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          v-model.trim="userName.val"
+          @blur="clearValidity('userName')"
+        />
+        <p v-if="!userName.isValid">Username shouldn't be empty.</p>
+      </div>
+      <div class="form-control" :class="{ invalid: !firstName.isValid }">
+        <label for="firstname">Firstname</label>
+        <input
+          type="text"
+          id="firstname"
+          v-model.trim="firstName.val"
+          @blur="clearValidity('firstName')"
+        />
+        <p v-if="!firstName.isValid">Firstname shouldn't be empty.</p>
+      </div>
+      <div class="form-control" :class="{ invalid: !lastName.isValid }">
+        <label for="lastname">Lastname</label>
+        <input
+          type="text"
+          id="lastname"
+          v-model.trim="lastName.val"
+          @blur="clearValidity('lastName')"
+        />
+        <p v-if="!lastName.isValid">Lastname shouldn't be empty.</p>
+      </div>
+      <p v-if="!formIsValid">Please fix the input errors.</p>
+      <base-button>Register</base-button>
+    </form>
+  </base-dialog>
 </template>
 
 <script>
@@ -78,6 +80,10 @@ export default {
         lastName: this.lastName.val,
       };
       this.$emit('save-data', formData);
+    },
+
+    closeForm() {
+      this.$router.go(-1);
     },
   },
 };

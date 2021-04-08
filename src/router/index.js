@@ -9,6 +9,8 @@ import LocationsList from '../views/locations/LocationsList.vue';
 import LocationDetail from '../views/locations/LocationDetail.vue';
 import LocationRegistration from '../views/locations/LocationRegistration.vue';
 
+import EventsList from '../views/events/EventsList.vue';
+
 import NotFound from '../views/NotFound.vue';
 
 import UserAuth from '../views/auth/UserAuth.vue';
@@ -21,14 +23,16 @@ const routes = [
     path: '/players',
     name: 'Players',
     component: PlayersList,
-    children: [{ path: ':id', component: PlayerDetail, props: true }],
+    children: [
+      { path: ':id', component: PlayerDetail, props: true },
+      {
+        path: 'register',
+        component: PlayerRegistration,
+        meta: { requiresAuth: true },
+      },
+    ],
   },
   // { path: '/players/:id', component: PlayerDetail, props: true },
-  {
-    path: '/register',
-    component: PlayerRegistration,
-    meta: { requiresAuth: true },
-  },
 
   {
     path: '/locations',
@@ -43,7 +47,7 @@ const routes = [
     ],
   },
 
-  { path: '/events', component: null },
+  { path: '/events', component: EventsList },
 
   { path: '/auth', component: UserAuth, meta: { requiresUnauth: true } },
 

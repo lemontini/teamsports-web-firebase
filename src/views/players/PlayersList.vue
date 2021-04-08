@@ -19,6 +19,16 @@
             @click="loadPlayers(true)"
             >Refresh</base-button
           >
+          <!-- <router-link v-if="isLoggedIn && !isPlayer" to="/register"
+          >Become a player</router-link
+        > -->
+          <base-button
+            mode="outline"
+            v-if="!isPlayer"
+            link
+            to="/players/register"
+            >Register</base-button
+          >
         </div>
         <div v-if="isLoading">
           <base-spinner></base-spinner>
@@ -59,6 +69,14 @@ export default {
   },
 
   computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
+
+    isPlayer() {
+      return this.$store.getters['players/isPlayer'];
+    },
+
     hasPlayers() {
       return !this.isLoading && this.filteredPlayers.length > 0;
     },

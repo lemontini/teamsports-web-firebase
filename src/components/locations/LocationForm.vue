@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="backdrop"></div> -->
-  <base-dialog show title="Add new location">
+  <base-dialog show title="Add new location" @close="closeForm">
     <form @submit.prevent="submitForm">
       <div class="form-control" :class="{ invalid: !name.isValid }">
         <label for="name">Name</label>
@@ -83,6 +83,10 @@ export default {
         maxCourts: this.maxCourts.val,
       };
       this.$emit('save-data', formData);
+    },
+
+    closeForm() {
+      this.$router.go(-1);
     },
   },
 };
