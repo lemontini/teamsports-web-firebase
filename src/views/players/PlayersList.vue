@@ -8,7 +8,7 @@
       <p>{{ error }}</p>
     </base-dialog>
     <section>
-      <player-filter @change-filter="updateList"></player-filter>
+      <base-filter data="player" @change-filter="updateList"></base-filter>
     </section>
     <section>
       <base-card>
@@ -52,13 +52,9 @@
 
 <script>
 import PlayerItem from '../../components/players/PlayerItem.vue';
-import PlayerFilter from '../../components/players/PlayerFilter.vue';
 
 export default {
-  components: {
-    PlayerItem,
-    PlayerFilter,
-  },
+  components: { PlayerItem },
 
   data() {
     return {

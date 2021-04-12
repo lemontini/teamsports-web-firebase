@@ -2,13 +2,14 @@ import uuid from 'uuid';
 
 export default {
   async registerEvent(context, data) {
-    // const userId = context.rootGetters.userId;
+    const userId = context.rootGetters.userId;
     const token = context.rootGetters.token;
 
     let eventData = {
-      name: data.name,
-      address: data.address,
-      maxCourts: data.maxCourts,
+      title: data.title,
+      locationId: data.locationId,
+      hostId: userId,
+      players: data.players,
     };
 
     console.log(eventData.id);
@@ -47,14 +48,15 @@ export default {
     for (const key in responseData) {
       const event = {
         id: key,
-        name: responseData[key].name,
-        address: responseData[key].address,
-        maxCourts: responseData[key].maxCourts,
+        title: responseData[key].title,
+        hostId: responseData[key].hostId,
+        locationId: responseData[key].locationId,
+        players: responseData[key].players,
       };
       events.push(event);
     }
 
     context.commit('setEvents', events);
-    // context.commit('setFetchTimestamp');
+    context.commit('setFetchTimestamp');
   },
 };

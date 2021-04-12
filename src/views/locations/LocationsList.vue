@@ -8,7 +8,7 @@
       <p>{{ error }}</p>
     </base-dialog>
     <section>
-      <location-filter @change-filter="updateList"></location-filter>
+      <base-filter data="location" @change-filter="updateList"></base-filter>
     </section>
     <section>
       <base-card>
@@ -21,7 +21,7 @@
             Refresh
           </base-button>
           <base-button mode="outline" link to="/locations/register"
-            >Add new</base-button
+            >Create</base-button
           >
         </div>
         <div v-if="isLoading">
@@ -46,10 +46,9 @@
 
 <script>
 import LocationItem from '../../components/locations/LocationItem.vue';
-import LocationFilter from '../../components/locations/LocationFilter.vue';
 
 export default {
-  components: { LocationItem, LocationFilter },
+  components: { LocationItem },
 
   data() {
     return {

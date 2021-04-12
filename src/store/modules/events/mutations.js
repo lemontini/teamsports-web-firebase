@@ -5,7 +5,7 @@ export default {
   setEvents(state, payload) {
     state.events = payload;
   },
-  // setFetchTimestamp(state) {
-  //   state.lastFetch = new Date().getTime();
-  // },
+  setFetchTimestamp(state) {
+    state.lastFetch = new Date().getTime();
+  },
 };

@@ -7,9 +7,9 @@
     >
       <p>{{ error }}</p>
     </base-dialog>
-    <!-- <section>
-      <location-filter @change-filter="updateList"></location-filter>
-    </section> -->
+    <section>
+      <base-filter data="event" @change-filter="updateList"></base-filter>
+    </section>
     <section>
       <base-card>
         <div class="controls">
@@ -28,14 +28,15 @@
           <base-spinner></base-spinner>
         </div>
         <ul v-else-if="hasEvents">
-          <!-- <event-item
+          <event-item
             v-for="event in filteredEvents"
             :key="event.id"
             :id="event.id"
-            :name="event.name"
-            :address="event.address"
-            :last-name="event.maxCourts"
-          ></event-item> -->
+            :title="event.title"
+            :hostId="event.hostId"
+            :locationId="event.locationId"
+            :players="event.players"
+          ></event-item>
         </ul>
         <h3 v-else>No events found.</h3>
       </base-card>
@@ -45,11 +46,10 @@
 </template>
 
 <script>
-// import EventItem from '../../components/events/EventItem.vue';
-// import EventFilter from '../../components/events/EventFilter.vue';
+import EventItem from '../../components/events/EventItem.vue';
 
 export default {
-  // components: { LocationItem, LocationFilter },
+  components: { EventItem },
 
   data() {
     return {
@@ -67,7 +67,7 @@ export default {
     filteredEvents() {
       const events = this.$store.getters['events/events'];
       return events.filter(event =>
-        event.name.toLowerCase().includes(this.filterCriteria)
+        event.title.toLowerCase().includes(this.filterCriteria)
       );
     },
   },

@@ -54,7 +54,7 @@ export default {
     },
     handleKeyDown(event) {
       if (event.key === 'Escape') {
-        this.tryClose(); // Pressing the ESC key closes the modal
+        this.$emit('close'); // Pressing the ESC key closes the modal despite the status of 'fixed' attribute
       }
     },
   },

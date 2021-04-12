@@ -5,7 +5,7 @@ export default {
   setLocations(state, payload) {
     state.locations = payload;
   },
-  // setFetchTimestamp(state) {
-  //   state.lastFetch = new Date().getTime();
-  // },
+  setFetchTimestamp(state) {
+    state.lastFetch = new Date().getTime();
+  },
 };

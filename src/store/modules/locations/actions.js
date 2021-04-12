@@ -55,6 +55,6 @@ export default {
     }
 
     context.commit('setLocations', locations);
-    // context.commit('setFetchTimestamp');
+    context.commit('setFetchTimestamp');
   },
 };

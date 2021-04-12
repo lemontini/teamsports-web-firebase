@@ -1,4 +1,3 @@
-// import { createRouter } from 'vue-router';
 import { createRouter, createWebHistory } from 'vue-router';
 
 import PlayersList from '../views/players/PlayersList.vue';
@@ -10,6 +9,8 @@ import LocationDetail from '../views/locations/LocationDetail.vue';
 import LocationRegistration from '../views/locations/LocationRegistration.vue';
 
 import EventsList from '../views/events/EventsList.vue';
+import EventDetail from '../views/events/EventDetail.vue';
+import EventRegistration from '../views/events/EventRegistration.vue';
 
 import NotFound from '../views/NotFound.vue';
 
@@ -32,7 +33,6 @@ const routes = [
       },
     ],
   },
-  // { path: '/players/:id', component: PlayerDetail, props: true },
 
   {
     path: '/locations',
@@ -47,7 +47,18 @@ const routes = [
     ],
   },
 
-  { path: '/events', component: EventsList },
+  {
+    path: '/events',
+    component: EventsList,
+    children: [
+      { path: ':id', component: EventDetail, props: true },
+      {
+        path: 'register',
+        component: EventRegistration,
+        meta: { requiresAuth: true },
+      },
+    ],
+  },
 
   { path: '/auth', component: UserAuth, meta: { requiresUnauth: true } },
 

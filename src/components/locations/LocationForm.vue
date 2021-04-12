@@ -1,6 +1,5 @@
 <template>
-  <!-- <div class="backdrop"></div> -->
-  <base-dialog show title="Add new location" @close="closeForm">
+  <base-dialog show title="Create location" @close="closeForm">
     <form @submit.prevent="submitForm">
       <div class="form-control" :class="{ invalid: !name.isValid }">
         <label for="name">Name</label>
