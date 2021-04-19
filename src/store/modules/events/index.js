@@ -8,13 +8,13 @@ export default {
     return {
       lastFetch: null,
       events: [
-        {
-          id: 'e1',
-          title: 'Trečiadienio treniruotė',
-          locationId: null,
-          hostId: null,
-          players: [],
-        },
+        // {
+        //   id: 'e1',
+        //   title: 'Trečiadienio treniruotė',
+        //   locationId: 'fe7bedfd-f12a-4756-bff0-748096916071',
+        //   hostId: 'zq3mmf2ysCOmKdsFJBSCXz89wZ53',
+        //   players: [],
+        // },
       ],
     };
   },

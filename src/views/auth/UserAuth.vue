@@ -6,7 +6,7 @@
     <base-dialog :show="isLoading" title="Authenticating..." fixed>
       <base-spinner></base-spinner>
     </base-dialog>
-    <base-card>
+    <base-dialog show>
       <form @submit.prevent="submitForm">
         <div class="form-control">
           <label for="email">E-mail</label>
@@ -25,7 +25,7 @@
           switchModeButtonCaption
         }}</base-button>
       </form>
-    </base-card>
+    </base-dialog>
   </div>
 </template>
 

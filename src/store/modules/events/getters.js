@@ -13,4 +13,7 @@ export default {
     const currentTimestamp = new Date().getTime();
     return (currentTimestamp - lastFetch) / 1000 > 60;
   },
+  byId: state => id => {
+    return state.events.find(event => event.id === id);
+  },
 };

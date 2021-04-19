@@ -13,7 +13,8 @@ export default {
     const currentTimestamp = new Date().getTime();
     return (currentTimestamp - lastFetch) / 1000 > 60;
   },
-  getById: (_, getters) => id => {
-    return getters.locations.find(location => location.id === id);
+  byId: state => id => {
+    const location = state.locations.find(location => location.id === id);
+    return location ? location : null;
   },
 };

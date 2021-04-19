@@ -1,5 +1,5 @@
-<template
-  ><section>
+<template>
+  <section>
     <base-dialog show title="Location details" @close="back">
       <h2>{{ selectedLocation.name }}</h2>
       <h3>Address: {{ selectedLocation.address }}</h3>

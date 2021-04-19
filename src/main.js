@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 
-// import db from './firebaseDB';
+import db from './firebaseDB';
 
 import router from './router';
 import store from './store';
@@ -14,7 +14,7 @@ import BaseFilter from './components/utils/BaseFilter.vue';
 import './assets/css/main.css';
 
 createApp(App)
-  // .use(db)
+  .use(db)
   .use(router)
   .use(store)
   .component('base-card', BaseCard)

@@ -31,6 +31,7 @@ const routes = [
         component: PlayerRegistration,
         meta: { requiresAuth: true },
       },
+      // { path: '/auth', component: UserAuth, meta: { requiresUnauth: true } },
     ],
   },
 
@@ -44,6 +45,7 @@ const routes = [
         component: LocationRegistration,
         meta: { requiresAuth: true },
       },
+      // { path: 'auth', component: UserAuth, meta: { requiresUnauth: true } },
     ],
   },
 
@@ -57,6 +59,7 @@ const routes = [
         component: EventRegistration,
         meta: { requiresAuth: true },
       },
+      // { path: '/auth', component: UserAuth, meta: { requiresUnauth: true } },
     ],
   },
 
