@@ -1,5 +1,5 @@
 // import uuid from 'uuid';
-import db from '../../../firebaseDB';
+import { db } from '../../../firebaseDB';
 
 export default {
   async registerLocation(context, data) {
@@ -50,7 +50,7 @@ export default {
 
     // let responseData = null;
     const locations = [];
-    db.ref('teamsports/locations').once('value', responseData => {
+    await db.ref('teamsports/locations').once('value', responseData => {
       responseData.forEach(location => {
         locations.push({
           id: location.key,

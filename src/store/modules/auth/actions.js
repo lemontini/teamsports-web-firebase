@@ -1,21 +1,72 @@
 let timer;
 
+import { auth } from '../../../firebaseDB';
+
 export default {
   async login(context, payload) {
-    return context.dispatch('auth', {
-      ...payload,
-      mode: 'login',
-    });
+    auth
+      .signInWithEmailAndPassword(payload.email, payload.password)
+      .then(responseData => {
+        localStorage.setItem('userId', responseData.user.uid);
+        responseData.user.getIdToken().then(token => {
+          localStorage.setItem('token', token);
+          context.commit('setUser', {
+            token: localStorage.getItem('token'),
+            userId: localStorage.getItem('userId'),
+            // tokenExpiration: expirationDate,
+          });
+        });
+        // console.log(responseData.user.uid);
+      })
+      .catch(error => {
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // if (errorCode === 'auth/wrong-password') {
+        //   alert('Wrong password.');
+        // } else {
+        //   alert(errorMessage);
+        // }
+        console.log(error);
+      });
+    // return context.dispatch('auth', {
+    //   ...payload,
+    //   mode: 'login',
+    // });
   },
 
   async signup(context, payload) {
-    return context.dispatch('auth', {
-      ...payload,
-      mode: 'signup',
-    });
+    auth
+      .createUserWithEmailAndPassword(payload.email, payload.password)
+      .then(responseData => {
+        localStorage.setItem('userId', responseData.user.uid);
+        responseData.user.getIdToken().then(token => {
+          localStorage.setItem('token', token);
+          context.commit('setUser', {
+            token: localStorage.getItem('token'),
+            userId: localStorage.getItem('userId'),
+            // tokenExpiration: expirationDate,
+          });
+        });
+        // console.log(responseData.user.uid);
+      })
+      .catch(error => {
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // if (errorCode === 'auth/wrong-password') {
+        //   alert('Wrong password.');
+        // } else {
+        //   alert(errorMessage);
+        // }
+        console.log(error);
+      });
+    // return context.dispatch('auth', {
+    //   ...payload,
+    //   mode: 'signup',
+    // });
   },
 
   logout(context) {
+    auth.signOut();
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('tokenExpiration');

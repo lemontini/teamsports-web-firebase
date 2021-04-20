@@ -1,4 +1,4 @@
-import db from '../../../firebaseDB';
+import { db } from '../../../firebaseDB';
 
 export default {
   async registerPlayer(context, data) {

@@ -1,5 +1,5 @@
 import uuid from 'uuid';
-import db from '../../../firebaseDB';
+import { db } from '../../../firebaseDB';
 
 export default {
   async registerEvent(context, data) {
