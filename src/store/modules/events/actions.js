@@ -57,7 +57,7 @@ export default {
     //   events.push(event);
     // }
 
-    db.ref('teamsports/events').once('value', responseData => {
+    db.events.once('value', responseData => {
       responseData.forEach(event => {
         events.push({
           id: event.key,

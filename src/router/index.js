@@ -37,6 +37,7 @@ const routes = [
 
   {
     path: '/locations',
+    name: 'Locations',
     component: LocationsList,
     children: [
       { path: ':id', component: LocationDetail, props: true },
@@ -51,6 +52,7 @@ const routes = [
 
   {
     path: '/events',
+    name: 'Events',
     component: EventsList,
     children: [
       { path: ':id', component: EventDetail, props: true },

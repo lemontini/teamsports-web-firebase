@@ -27,7 +27,7 @@ export default {
     //   // error ...
     // }
 
-    const newLocation = db.ref('teamsports/locations').push();
+    const newLocation = db.locations.push();
     newLocation.set(locationData);
 
     locationData.id = newLocation.key;
@@ -50,7 +50,7 @@ export default {
 
     // let responseData = null;
     const locations = [];
-    await db.ref('teamsports/locations').once('value', responseData => {
+    await db.locations.once('value', responseData => {
       responseData.forEach(location => {
         locations.push({
           id: location.key,

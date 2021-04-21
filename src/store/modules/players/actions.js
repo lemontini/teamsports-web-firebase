@@ -13,9 +13,7 @@ export default {
     // const token = context.rootGetters.token;
 
     // const newPlayer = db.ref('teamsports/players').push();
-    db.ref('teamsports/players')
-      .child(userId)
-      .set(playerData);
+    db.players.child(userId).set(playerData);
     // (await newPlayer).set(playerData);
 
     // const response = await fetch(
@@ -69,7 +67,7 @@ export default {
     // });
 
     const players = [];
-    db.ref('teamsports/players').once('value', responseData => {
+    db.players.once('value', responseData => {
       responseData.forEach(player => {
         players.push({
           id: player.key,

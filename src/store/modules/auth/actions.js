@@ -4,34 +4,61 @@ import { auth } from '../../../firebaseDB';
 
 export default {
   async login(context, payload) {
-    auth
+    const responseData = await auth
       .signInWithEmailAndPassword(payload.email, payload.password)
-      .then(responseData => {
-        localStorage.setItem('userId', responseData.user.uid);
-        responseData.user.getIdToken().then(token => {
-          localStorage.setItem('token', token);
-          context.commit('setUser', {
-            token: localStorage.getItem('token'),
-            userId: localStorage.getItem('userId'),
-            // tokenExpiration: expirationDate,
-          });
-        });
-        // console.log(responseData.user.uid);
-      })
       .catch(error => {
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        // if (errorCode === 'auth/wrong-password') {
-        //   alert('Wrong password.');
-        // } else {
-        //   alert(errorMessage);
-        // }
         console.log(error);
       });
+    console.log(responseData);
+    return context.dispatch('processResponse', responseData);
+    // {
+    //   localStorage.setItem('userId', responseData.user.uid);
+    //   responseData.user.getIdToken().then(token => {
+    //     localStorage.setItem('token', token);
+    //     context.commit('setUser', {
+    //       token: localStorage.getItem('token'),
+    //       userId: localStorage.getItem('userId'),
+    //       // tokenExpiration: expirationDate,
+    //     });
+    //   });
+    //   // console.log(responseData.user.uid);
+    // })
+    // .catch(error => {
+    //   // const errorCode = error.code;
+    //   // const errorMessage = error.message;
+    //   // if (errorCode === 'auth/wrong-password') {
+    //   //   alert('Wrong password.');
+    //   // } else {
+    //   //   alert(errorMessage);
+    //   // }
+    //   console.log(error);
+    // });
     // return context.dispatch('auth', {
     //   ...payload,
     //   mode: 'login',
     // });
+  },
+
+  async processResponse(context, responseData) {
+    const token = await responseData.user.getIdToken();
+
+    const expiresIn = responseData.expiresIn * 1000;
+    // const expiresIn = 5000; // for testing purposes - autoLogout after 5 sec.
+    const expirationDate = new Date().getTime() + expiresIn;
+
+    localStorage.setItem('token', token);
+    localStorage.setItem('userId', responseData.user.uid);
+    localStorage.setItem('tokenExpiration', expirationDate);
+
+    timer = setTimeout(function() {
+      context.dispatch('autoLogout');
+    }, expiresIn);
+
+    context.commit('setUser', {
+      token: token,
+      userId: responseData.user.uid,
+      // tokenExpiration: expirationDate,
+    });
   },
 
   async signup(context, payload) {

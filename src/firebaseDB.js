@@ -17,6 +17,13 @@ const firebaseConfig = {
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 // Get a reference to the database and authorisation services
-const db = firebaseApp.database();
+const dbHandler = firebaseApp.database();
 const auth = firebase.auth();
+
+const db = {
+  players: dbHandler.ref('teamsports/players'),
+  locations: dbHandler.ref('teamsports/locations'),
+  events: dbHandler.ref('teamsports/events'),
+};
+
 export { db, auth };

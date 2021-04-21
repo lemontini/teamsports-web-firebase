@@ -27,7 +27,7 @@ export default {
     const currentTimeStamp = new Date().getTime();
     return (currentTimeStamp - lastFetch) / 1000 > 60;
   },
-  getById: (_, getters) => id => {
+  byId: (_, getters) => id => {
     return getters.players.find(player => player.id === id);
   },
 };
