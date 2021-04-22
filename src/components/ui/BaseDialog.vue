@@ -1,7 +1,7 @@
 <template>
   <teleport to="body">
     <div v-if="show" @click="tryClose" class="backdrop"></div>
-    <dialog open v-if="show">
+    <dialog open v-if="show" :style="{ 'z-index': error }">
       <header>
         <slot name="header">
           <h2>{{ title }}</h2>
@@ -24,19 +24,10 @@
 export default {
   props: {
     actions: { type: Boolean, required: false },
-    show: {
-      type: Boolean,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: false,
-    },
-    fixed: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
+    show: { type: Boolean, required: true },
+    title: { type: String, required: false },
+    fixed: { type: Boolean, required: false, default: false },
+    error: { type: String, required: false, default: '50' },
   },
   emits: ['close'],
   created() {
@@ -77,7 +68,7 @@ dialog {
   top: 20vh;
   left: 10%;
   width: 80%;
-  z-index: 100;
+  z-index: 50;
   border-radius: 12px;
   border: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.76);

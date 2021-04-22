@@ -1,12 +1,18 @@
 <template>
   <div>
-    <base-dialog :show="!!error" title="An error occurred" @close="handleError">
+    <base-dialog
+      :show="!!error"
+      error="100"
+      title="An error occurred"
+      @close="handleError"
+    >
       <p>{{ error }}</p>
     </base-dialog>
     <base-dialog :show="isLoading" title="Authenticating..." fixed>
-      <base-spinner></base-spinner>
+      <!-- <base-spinner></base-spinner> -->
+      <ProgressSpinner />
     </base-dialog>
-    <base-dialog show>
+    <Dialog visible="true">
       <form @submit.prevent="submitForm">
         <div class="form-control">
           <label for="email">E-mail</label>
@@ -25,7 +31,7 @@
           switchModeButtonCaption
         }}</base-button>
       </form>
-    </base-dialog>
+    </Dialog>
   </div>
 </template>
 
@@ -39,6 +45,7 @@ export default {
       mode: 'login',
       isLoading: false,
       error: null,
+      show: false,
     };
   },
 

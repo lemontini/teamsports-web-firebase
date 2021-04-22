@@ -25,7 +25,8 @@
           >
         </div>
         <div v-if="isLoading">
-          <base-spinner></base-spinner>
+          <!-- <base-spinner></base-spinner> -->
+          <ProgressSpinner />
         </div>
         <ul v-else-if="hasLocations">
           <location-item
