@@ -1,34 +1,67 @@
 <template>
-  <header id="nav">
-    <div>
-      <img class="logo" src="../assets/logo.png" width="50" />
-      <h1 class="app-title">TeamSports</h1>
-    </div>
-    <nav>
-      <router-link to="/players">Players</router-link>
-      <router-link to="/locations">Locations</router-link>
-      <router-link to="/events">Events</router-link>
-    </nav>
-    <base-button link to="/auth" v-if="!isLoggedIn && !isAuthInProgress"
-      >Login</base-button
-    >
-    <base-button link v-else-if="isLoggedIn && !isPlayer" @click="logout"
-      >Log off</base-button
-    >
-    <base-button @click="logout" v-else-if="isLoggedIn && isPlayer">{{
-      currentUser
-    }}</base-button>
-    <!-- {{ isLoggedIn }}
-    {{ isPlayer }} -->
+  <!-- <header id="nav"> -->
+  <header>
+    <Toolbar class="p-py-2">
+      <template #left>
+        <!-- <div> -->
+        <img class="logo" src="../assets/icons/logo.png" width="30" />
+        <h1 class="app-title">TeamSports</h1>
+        <!-- </div> -->
+      </template>
+      <template #right>
+        <Tabmenu :model="items" id="nav">
+          <router-link to="/players">Players</router-link>
+          <router-link to="/locations">Locations</router-link>
+          <router-link to="/events">Events</router-link>
+        </Tabmenu>
+
+        <Button
+          id="login"
+          type="button"
+          label="Login"
+          icon="pi pi-sign-in"
+          v-if="!isLoggedIn"
+          :loading="isAuthInProgress"
+          :class="{ 'p-disabled': isAuthInProgress }"
+          @click="goTo('/auth')"
+        >
+        </Button>
+        <!-- <Button link v-else-if="isLoggedIn && !isPlayer" @click="logout"
+          >Log off</Button
+        > -->
+        <Button
+          :label="currentUser"
+          icon="pi pi-sign-out"
+          @click="logout"
+          v-else-if="isLoggedIn && isPlayer"
+        ></Button>
+
+        <!-- {{ isLoggedIn }}
+      {{ isPlayer }} -->
+      </template>
+    </Toolbar>
   </header>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
+  data() {
+    return {
+      items: [
+        { label: 'Players', icon: 'pi pi-users', to: '/players' },
+        { label: 'Locations', icon: 'pi pi-home', to: '/locations' },
+        { label: 'Events', icon: 'pi pi-calendar', to: '/events' },
+      ],
+      prevRoute: null,
+    };
+  },
   computed: {
-    isLoggedIn() {
-      return this.$store.getters.isAuthenticated;
-    },
+    ...mapGetters({ isLoggedIn: 'isAuthenticated' }),
+    // isLoggedIn() {
+    //   return this.$store.getters.isAuthenticated;
+    // },
     isPlayer() {
       return this.$store.getters['players/isPlayer'];
     },
@@ -39,10 +72,20 @@ export default {
       return this.$route.path === '/auth';
     },
   },
+
+  beforeRouteEnter(_, from, next) {
+    next(vm => {
+      vm.prevRoute = from;
+    });
+  },
+
   methods: {
+    goTo(link) {
+      this.$router.push(link);
+    },
     logout() {
       this.$store.dispatch('logout');
-      this.$router.replace('/players');
+      this.$router.replace(this.prevRoute);
     },
   },
 };
@@ -51,14 +94,15 @@ export default {
 <style scoped>
 .logo {
   float: left;
-  padding: 0 1rem;
+  /* padding: 0 1rem; */
 }
 
 .app-title {
   float: left;
+  margin: 0 1rem 0 1rem;
 }
 
-#nav {
+/* #nav {
   width: 100%;
   margin: auto;
   height: 5rem;
@@ -85,7 +129,7 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #ffaa3b;
-}
+} */
 
 /* #logo {
   float: left;

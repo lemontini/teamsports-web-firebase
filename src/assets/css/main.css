@@ -1,8 +1,18 @@
+/* :root {
+  --text-color: #ffaa3b;
+} */
+
 body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
   background-color: rgb(102, 102, 102);
-  color: #ffaa3b;
+  /* color: #ffaa3b; */
+  color: var(--primary-color);
 }
+
+/* .p-button {
+  @extend .p-button-rounded
+  border-radius: 10px;;
+} */

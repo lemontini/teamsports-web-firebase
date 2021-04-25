@@ -22,6 +22,7 @@ export default {
 
   async logout(context) {
     await auth.signOut();
+
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
 

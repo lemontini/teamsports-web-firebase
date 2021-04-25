@@ -1,8 +1,19 @@
 <template>
-  <button v-if="!link" :class="mode">
+  <Button
+    v-if="!link"
+    class="p-button p-button-rounded"
+    :class="mode"
+    @click="goTo"
+  >
     <slot></slot>
-  </button>
-  <router-link v-else :to="to" :class="mode">
+  </Button>
+  <router-link
+    v-else
+    :to="to"
+    class="p-button p-button-rounded"
+    :class="mode"
+    @click="goTo"
+  >
     <slot></slot>
   </router-link>
 </template>
@@ -26,11 +37,20 @@ export default {
       default: '/',
     },
   },
+  methods: {
+    goTo() {
+      this.$router.push(this.to);
+    },
+  },
 };
 </script>
 
 <style scoped>
 button,
+a {
+  text-decoration: none;
+}
+/* button,
 a {
   text-decoration: none;
   padding: 0.75rem 1.5rem;
@@ -71,5 +91,5 @@ button:active {
   color: white;
   background-color: #ff9b17;
   border-color: #ff9100;
-}
+} */
 </style>

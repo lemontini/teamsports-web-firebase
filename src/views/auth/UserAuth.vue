@@ -1,37 +1,76 @@
 <template>
   <div>
-    <base-dialog
-      :show="!!error"
-      error="100"
-      title="An error occurred"
+    <!-- <Dialog :visible="!!isLoading" title="Authenticating..." fixed> -->
+    <!-- <base-spinner></base-spinner> -->
+    <!-- <ProgressSpinner /> -->
+    <!-- </Dialog> -->
+    <Message
+      v-if="!!error"
+      severity="error"
+      :closable="false"
+      :sticky="false"
+      :life="5000"
       @close="handleError"
     >
       <p>{{ error }}</p>
-    </base-dialog>
-    <base-dialog :show="isLoading" title="Authenticating..." fixed>
-      <!-- <base-spinner></base-spinner> -->
-      <ProgressSpinner />
-    </base-dialog>
-    <Dialog visible="true">
-      <form @submit.prevent="submitForm">
-        <div class="form-control">
+    </Message>
+    <ProgressSpinner class="focused" v-if="isLoading" />
+    <!-- <BlockUI :blocked="isLoading" :fullScreen="true"> -->
+    <Dialog
+      :visible="true"
+      header="Authentication"
+      closeOnEscape
+      @update:visible="close"
+    >
+      <form @submit.prevent="submitForm" class="p-fluid">
+        <div class="p-field">
           <label for="email">E-mail</label>
-          <input type="email" id="email" v-model.trim="email" />
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">
+              <i class="pi pi-user"></i>
+            </span>
+            <InputText
+              type="email"
+              id="email"
+              placeholder="Email"
+              v-model.trim="email"
+            />
+          </div>
         </div>
-        <div class="form-control">
+        <div class="p-field">
           <label for="password">Password</label>
-          <input type="password" id="password" v-model="password" />
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">
+              <i class="pi pi-lock"></i>
+            </span>
+            <InputText
+              type="password"
+              id="password"
+              placeholder="Password"
+              v-model="password"
+            />
+          </div>
+        </div>
+        <div class="p-fluid p-grid p-mt-5">
+          <Button
+            type="submit"
+            class="p-button-rounded p-button-raised p-col p-mx-2"
+            :label="submitButtonCaption"
+          />
+          <Button
+            type="button"
+            class="p-button-secondary p-button-rounded p-button-text p-col p-mx-2"
+            :label="switchModeButtonCaption"
+            @click="switchAuthMode"
+          />
         </div>
         <p v-if="!formIsValid">
           Please enter a valid email and password (must be at least 6 caracters
           long).
         </p>
-        <base-button>{{ submitButtonCaption }}</base-button>
-        <base-button type="button" mode="flat" @click="switchAuthMode">{{
-          switchModeButtonCaption
-        }}</base-button>
       </form>
     </Dialog>
+    <!-- </BlockUI> -->
   </div>
 </template>
 
@@ -46,6 +85,7 @@ export default {
       isLoading: false,
       error: null,
       show: false,
+      prevRoute: null,
     };
   },
 
@@ -59,14 +99,28 @@ export default {
     },
     switchModeButtonCaption() {
       if (this.mode === 'login') {
-        return 'SignUp instead';
+        return '... or SignUp';
       } else {
-        return 'Login instead';
+        return '... or Login';
       }
     },
   },
 
+  beforeRouteEnter(_, from, next) {
+    next(vm => {
+      vm.prevRoute = from;
+    });
+  },
+
   methods: {
+    close() {
+      this.goBack();
+    },
+
+    goBack() {
+      this.$router.replace(this.prevRoute);
+    },
+
     async submitForm() {
       this.formIsValid = true;
       if (
@@ -91,9 +145,10 @@ export default {
         } else {
           await this.$store.dispatch('signup', actionPayload);
         }
-        this.$router.replace('/players');
+        this.goBack();
       } catch (err) {
-        this.error = err.message || 'Failed to authenticate, try later.';
+        this.error = err.message || 'Failed to authenticate, try again later.';
+        setTimeout(this.handleError, 5000);
       }
 
       this.isLoading = false;
@@ -115,7 +170,7 @@ export default {
 </script>
 
 <style scoped>
-form {
+/* form {
   margin: 1rem;
   padding: 1rem;
 }
@@ -144,5 +199,16 @@ textarea:focus {
   border-color: #3d008d;
   background-color: #faf6ff;
   outline: none;
+} */
+
+.focused {
+  height: 100%;
+  position: fixed;
+  overflow: hidden;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 </style>
