@@ -34,7 +34,10 @@ import 'primeicons/primeicons.css';
 
 import './assets/css/main.css';
 
-createApp(App)
+import mitt from 'mitt';
+const emitter = mitt();
+
+const app = createApp(App)
   .use(router)
   .use(store)
   .use(PrimeVue, { ripple: true })
@@ -54,5 +57,8 @@ createApp(App)
   .component('Button', Button)
   .component('Message', Message)
   .component('Password', Password)
-  .component('DataView', DataView)
-  .mount('#app');
+  .component('DataView', DataView);
+
+app.config.globalProperties.emitter = emitter;
+
+app.mount('#app');

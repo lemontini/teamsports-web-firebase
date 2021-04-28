@@ -7,9 +7,9 @@
     >
       <p>{{ error }}</p>
     </base-dialog>
-    <section>
+    <!-- <section>
       <base-filter data="player" @change-filter="updateList"></base-filter>
-    </section>
+    </section> -->
     <section>
       <base-card>
         <div class="controls">
@@ -87,6 +87,12 @@ export default {
 
   created() {
     this.loadPlayers();
+  },
+
+  mounted() {
+    this.emitter.on('change-filter', filterCriteria => {
+      this.filterCriteria = filterCriteria;
+    });
   },
 
   methods: {

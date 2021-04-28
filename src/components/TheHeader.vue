@@ -1,19 +1,20 @@
 <template>
   <!-- <header id="nav"> -->
   <header>
-    <Toolbar class="p-py-2">
+    <Toolbar class="p-d-flex p-p-2 no-wrap">
       <template #left>
-        <!-- <div> -->
-        <img class="logo" src="../assets/icons/logo.png" width="30" />
-        <h1 class="app-title">TeamSports</h1>
-        <!-- </div> -->
-      </template>
-      <template #right>
-        <Tabmenu :model="items" id="nav">
+        <span class="no-wrap">
+          <img class="logo" src="../assets/icons/logo.png" width="22" />
+          <h2 class="app-title">TeamSports</h2>
+        </span>
+        <Tabmenu :model="items" id="nav" class="p-mr-3 no-wrap">
           <router-link to="/players">Players</router-link>
           <router-link to="/locations">Locations</router-link>
           <router-link to="/events">Events</router-link>
         </Tabmenu>
+      </template>
+      <template #right>
+        <base-filter></base-filter>
 
         <Button
           id="login"
@@ -57,6 +58,7 @@ export default {
       prevRoute: null,
     };
   },
+
   computed: {
     ...mapGetters({ isLoggedIn: 'isAuthenticated' }),
     // isLoggedIn() {
@@ -99,7 +101,17 @@ export default {
 
 .app-title {
   float: left;
-  margin: 0 1rem 0 1rem;
+  margin: 0 1rem 0 0.5rem;
+}
+
+button,
+.no-wrap {
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+}
+
+.no-wrap {
+  align-items: center;
 }
 
 /* #nav {
