@@ -96,10 +96,6 @@ export default {
   },
 
   methods: {
-    updateList(filterCriteria) {
-      this.filterCriteria = filterCriteria;
-    },
-
     async loadPlayers(refresh = false) {
       this.isLoading = true;
       try {

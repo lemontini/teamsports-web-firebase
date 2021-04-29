@@ -83,10 +83,6 @@ export default {
   },
 
   methods: {
-    updateList(filterCriteria) {
-      this.filterCriteria = filterCriteria;
-    },
-
     async loadLocations(refresh = false) {
       this.isLoading = true;
       try {

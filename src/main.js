@@ -16,6 +16,7 @@ import BaseFilter from './components/utils/BaseFilter.vue';
 import Toolbar from 'primevue/toolbar';
 import Menubar from 'primevue/menubar';
 import Tabmenu from 'primevue/tabmenu';
+import TabView from 'primevue/tabview';
 import Card from 'primevue/card';
 import Dialog from 'primevue/dialog';
 import ProgressSpinner from 'primevue/progressspinner';
@@ -49,6 +50,7 @@ const app = createApp(App)
   .component('Toolbar', Toolbar)
   .component('Menubar', Menubar)
   .component('Tabmenu', Tabmenu)
+  .component('TabView', TabView)
   .component('Card', Card)
   .component('Dialog', Dialog)
   .component('ProgressSpinner', ProgressSpinner)

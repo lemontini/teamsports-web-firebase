@@ -6,7 +6,7 @@
       class="p-flex"
       type="text"
       id="name"
-      :placeholder="data"
+      :placeholder="target"
       autocomplete="off"
       v-model.trim="search"
     />
@@ -23,6 +23,7 @@ export default {
   data() {
     return {
       search: '',
+      target: '',
     };
   },
   watch: {
@@ -31,6 +32,19 @@ export default {
       this.emitter.emit('change-filter', this.search.toLowerCase());
     },
   },
+  // mounted() {
+  //   // console.dir(this.$route);
+  //   this.emitter.on('route-changed', route => {
+  //     this.target = route;
+  //   });
+  //   // const route = this.$route;
+  //   // if (route) {
+  //   //   this.myRoute = route.name.toLowerCase();
+  //   // }
+  // },
+  // beforeUnmount() {
+  //   this.emiter.off('route-changed');
+  // },
 };
 </script>
 

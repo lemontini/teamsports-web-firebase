@@ -56,6 +56,7 @@ export default {
       isLoading: false,
       error: null,
       filterCriteria: '',
+      route: null,
     };
   },
 
@@ -80,13 +81,14 @@ export default {
     this.emitter.on('change-filter', filterCriteria => {
       this.filterCriteria = filterCriteria;
     });
+    // this.emitter.emit('route-change', this.$route.name.toLowerCase());
+  },
+
+  beforeUnmount() {
+    this.emitter.off('change-filter');
   },
 
   methods: {
-    updateList(filterCriteria) {
-      this.filterCriteria = filterCriteria;
-    },
-
     async loadEvents(refresh = false) {
       this.isLoading = true;
       try {
