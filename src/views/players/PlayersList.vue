@@ -7,15 +7,14 @@
     >
       <p>{{ error }}</p>
     </base-dialog>
-    <!-- <section>
-      <base-filter data="player" @change-filter="updateList"></base-filter>
-    </section> -->
+    <Toast />
+    <ConfirmDialog></ConfirmDialog>
     <section>
       <base-card>
         <div class="controls">
           <base-button
             v-if="hasPlayers"
-            mode="outline"
+            class="p-button-outlined"
             @click="loadPlayers(true)"
             >Refresh</base-button
           >
@@ -23,7 +22,7 @@
           >Become a player</router-link
         > -->
           <base-button
-            mode="outline"
+            class="p-button-outlined"
             v-if="!isPlayer"
             link
             to="/players/register"
@@ -31,7 +30,7 @@
           >
         </div>
         <div v-if="isLoading">
-          <base-spinner></base-spinner>
+          <ProgressSpinner />
         </div>
         <ul v-else-if="hasPlayers">
           <player-item

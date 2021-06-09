@@ -1,5 +1,5 @@
 <template>
-  <base-dialog show title="Create location" @close="closeForm">
+  <BaseDialog show title="Create location" @close="closeForm">
     <form @submit.prevent="submitForm">
       <div class="form-control" :class="{ invalid: !name.isValid }">
         <label for="name">Name</label>
@@ -34,7 +34,7 @@
       <p v-if="!formIsValid">Please fix the input errors.</p>
       <base-button>Register</base-button>
     </form>
-  </base-dialog>
+  </BaseDialog>
 </template>
 
 <script>
@@ -81,6 +81,7 @@ export default {
         address: this.address.val,
         maxCourts: this.maxCourts.val,
       };
+      console.log(formData);
       this.$emit('save-data', formData);
     },
 

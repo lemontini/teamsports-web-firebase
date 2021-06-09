@@ -1,10 +1,5 @@
 <template>
-  <Button
-    v-if="!link"
-    class="p-button p-button-rounded"
-    :class="mode"
-    @click="goTo"
-  >
+  <Button v-if="!link" class="p-button-rounded" :class="mode" @click="goTo">
     <slot></slot>
   </Button>
   <router-link

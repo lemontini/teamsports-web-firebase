@@ -7,38 +7,37 @@
     >
       <p>{{ error }}</p>
     </base-dialog>
-    <!-- <section>
-      <base-filter data="location" @change-filter="updateList"></base-filter>
-    </section> -->
+    <Toast />
+    <ConfirmDialog></ConfirmDialog>
     <section>
       <base-card>
         <div class="controls">
           <base-button
             v-if="hasLocations"
-            mode="outline"
+            class="p-button-outlined"
             @click="loadLocations(true)"
-          >
-            Refresh
+            >Refresh
           </base-button>
-          <base-button mode="outline" link to="/locations/register"
-            >Create</base-button
-          >
+          <base-button class="p-button-outlined" link to="/locations/register"
+            >Create
+          </base-button>
         </div>
-        <div v-if="isLoading">
-          <!-- <base-spinner></base-spinner> -->
-          <ProgressSpinner />
+        <div>
+          <div v-if="isLoading">
+            <ProgressSpinner />
+          </div>
+          <ul v-else-if="hasLocations">
+            <location-item
+              v-for="location in filteredLocations"
+              :key="location.id"
+              :id="location.id"
+              :name="location.name"
+              :address="location.address"
+              :last-name="location.maxCourts"
+            ></location-item>
+          </ul>
+          <h3 v-else>No locations found.</h3>
         </div>
-        <ul v-else-if="hasLocations">
-          <location-item
-            v-for="location in filteredLocations"
-            :key="location.id"
-            :id="location.id"
-            :name="location.name"
-            :address="location.address"
-            :last-name="location.maxCourts"
-          ></location-item>
-        </ul>
-        <h3 v-else>No locations found.</h3>
       </base-card>
       <router-view />
     </section>
@@ -47,9 +46,10 @@
 
 <script>
 import LocationItem from '../../components/locations/LocationItem.vue';
+import BaseCard from '../../components/ui/BaseCard.vue';
 
 export default {
-  components: { LocationItem },
+  components: { LocationItem, BaseCard },
 
   data() {
     return {

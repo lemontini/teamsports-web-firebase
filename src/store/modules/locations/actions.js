@@ -63,4 +63,17 @@ export default {
       context.commit('setFetchTimestamp');
     });
   },
+
+  async deleteLocation(context, payload) {
+    await db.locations
+      .child(payload)
+      .remove()
+      .then(() => {
+        console.log('Succeeded');
+        context.commit('removeLocation', payload);
+      })
+      .catch(error => {
+        console.log('Remove failed: ' + error);
+      });
+  },
 };

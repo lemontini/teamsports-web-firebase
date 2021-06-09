@@ -15,7 +15,9 @@ export default {
   currentUser(_1, getters, _2, rootGetters) {
     const players = getters.players;
     const userId = rootGetters.userId;
-    return players.find(player => player.id === userId).userName;
+    return getters.isPlayer
+      ? players.find(player => player.id === userId).userName
+      : 'unknown';
     // might get slow after the database increases.
     // better add a rootState data property [currentUser]
   },

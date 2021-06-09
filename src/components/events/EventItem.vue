@@ -2,11 +2,7 @@
   <li>
     <h2>{{ title }}</h2>
     <div class="actions">
-      <base-button
-        mode="flat"
-        style="font-size:24px"
-        link
-        :to="eventDetailsLink"
+      <base-button class="p-button-rounded" link :to="eventDetailsLink"
         ><i class="fas fa-edit" v-if="editable" /><i
           class="fas fa-info-circle"
           v-else

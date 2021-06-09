@@ -7,20 +7,17 @@
     >
       <p>{{ error }}</p>
     </base-dialog>
-    <!-- <section>
-      <base-filter data="event" @change-filter="updateList"></base-filter>
-    </section> -->
     <section>
       <base-card>
         <div class="controls">
           <base-button
             v-if="hasEvents"
-            mode="outline"
+            class="p-button-outlined"
             @click="loadEvents(true)"
           >
             Refresh
           </base-button>
-          <base-button mode="outline" link to="/events/register"
+          <base-button class="p-button-outlined" link to="/events/register"
             >Create</base-button
           >
         </div>

@@ -1,10 +1,14 @@
 <template>
-  <li>
-    <h2>{{ name }}</h2>
+  <li :id="id">
+    <router-link :to="locationDetailsLink">
+      <h2>{{ name }}</h2>
+    </router-link>
     <div class="actions">
-      <base-button mode="outline" link :to="locationDetailsLink"
-        >View Details</base-button
-      >
+      <Button
+        class="p-button-rounded"
+        @click="confirmDelete()"
+        icon="pi pi-times"
+      ></Button>
     </div>
   </li>
 </template>
@@ -17,16 +21,49 @@ export default {
       return this.$route.path + '/' + this.id; // for accessing the location details
     },
   },
+  methods: {
+    confirmDelete() {
+      this.$confirm.require({
+        message: 'Do you want to delete this record?',
+        header: 'Delete Confirmation',
+        icon: 'pi pi-info-circle',
+        acceptClass: 'p-button-danger',
+        accept: () => {
+          this.$store.dispatch('locations/deleteLocation', this.id);
+          this.$toast.add({
+            severity: 'info',
+            summary: 'Confirmed',
+            detail: 'Location deleted',
+            life: 3000,
+          });
+        },
+        reject: () => {
+          this.$toast.add({
+            severity: 'error',
+            summary: 'Rejected',
+            detail: 'You have rejected',
+            life: 3000,
+          });
+        },
+      });
+    },
+  },
 };
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 li {
   margin: 1rem 0;
   border: 1px solid #ffaa3b9c;
   background-color: #504e49;
   border-radius: 0.8rem 0rem 0.8rem 0rem;
   padding: 1rem;
+  text-decoration: none;
 }
 
 h2 {

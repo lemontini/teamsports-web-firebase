@@ -8,9 +8,7 @@
           <h2 class="app-title">TeamSports</h2>
         </span>
         <Tabmenu :model="items" id="nav" class="p-mr-3 no-wrap">
-          <router-link to="/players">Players</router-link>
-          <router-link to="/locations">Locations</router-link>
-          <router-link to="/events">Events</router-link>
+          <router-view />
         </Tabmenu>
       </template>
       <template #right>
@@ -68,6 +66,7 @@ export default {
       return this.$store.getters['players/isPlayer'];
     },
     currentUser() {
+      console.log(this.$store.getters['players/currentUser']);
       return this.$store.getters['players/currentUser'];
     },
     isAuthInProgress() {
@@ -79,6 +78,11 @@ export default {
     next(vm => {
       vm.prevRoute = from;
     });
+  },
+
+  created() {
+    console.log('isLoggedIn? ' + this.isLoggedIn);
+    console.log('isPlayer? ' + this.isPlayer);
   },
 
   methods: {

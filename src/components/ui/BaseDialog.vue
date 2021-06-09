@@ -1,12 +1,22 @@
 <template>
   <teleport to="body">
-    <div v-if="show" @click="tryClose" class="backdrop"></div>
-    <dialog open v-if="show" :style="{ 'z-index': error }">
-      <header>
+    <!-- <div v-if="show" @click="tryClose" class="backdrop"></div> -->
+    <!-- <Dialog open v-if="show" :style="{ 'z-index': error }"> -->
+    <Dialog
+      v-if="show"
+      class="p-fluid"
+      @hide="tryClose"
+      modal
+      closeOnEscape
+      dismissableMask
+      header="New location"
+      v-model:visible="display"
+    >
+      <template #header>
         <slot name="header">
           <h2>{{ title }}</h2>
         </slot>
-      </header>
+      </template>
       <section>
         <slot></slot>
       </section>
@@ -16,7 +26,7 @@
           <base-button v-if="actions" @click="tryClose">Close</base-button>
         </slot>
       </menu>
-    </dialog>
+    </Dialog>
   </teleport>
 </template>
 
@@ -28,6 +38,11 @@ export default {
     title: { type: String, required: false },
     fixed: { type: Boolean, required: false, default: false },
     error: { type: String, required: false, default: '50' },
+  },
+  data() {
+    return {
+      display: true,
+    };
   },
   emits: ['close'],
   created() {

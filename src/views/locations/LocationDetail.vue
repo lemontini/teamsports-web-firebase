@@ -1,11 +1,17 @@
 <template>
-  <section>
-    <base-dialog show title="Location details" @close="back">
-      <h2>{{ selectedLocation.name }}</h2>
-      <h3>Address: {{ selectedLocation.address }}</h3>
-      <h3>Courts: {{ selectedLocation.maxCourts }}</h3>
-    </base-dialog>
-  </section>
+  <Dialog
+    class="p-fluid"
+    header="Location details"
+    @hide="back"
+    modal
+    closeOnEscape
+    dismissableMask
+    v-model:visible="display"
+  >
+    <h2>{{ selectedLocation.name }}</h2>
+    <h3>Address: {{ selectedLocation.address }}</h3>
+    <h3>Courts: {{ selectedLocation.maxCourts }}</h3>
+  </Dialog>
 </template>
 
 <script>
@@ -14,6 +20,7 @@ export default {
   data() {
     return {
       selectedLocation: null,
+      display: true,
     };
   },
   created() {
@@ -23,7 +30,7 @@ export default {
   },
   methods: {
     back() {
-      this.$router.replace('/locations');
+      this.$router.go(-1);
     },
   },
 };
